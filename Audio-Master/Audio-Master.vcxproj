@@ -24,10 +24,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\Core\Logger.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\Core\Settings.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\DataManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\Core\Logger.cpp">
       <SubType>
       </SubType>
     </ClCompile>
