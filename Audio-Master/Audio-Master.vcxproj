@@ -20,9 +20,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core.h" />
+    <ClInclude Include="src\Core\DataManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\Core\Settings.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\DataManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\Core\Settings.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -81,16 +89,16 @@
     <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -111,11 +119,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxbase$(wxShortVersionString)ud.lib;wxbase$(wxShortVersionString)ud_net.lib;wxbase$(wxShortVersionString)ud_xml.lib;wxmsw$(wxShortVersionString)ud_adv.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxmsw$(wxShortVersionString)ud_core.lib;wxmsw$(wxShortVersionString)ud_gl.lib;wxmsw$(wxShortVersionString)ud_html.lib;wxmsw$(wxShortVersionString)ud_media.lib;wxmsw$(wxShortVersionString)ud_propgrid.lib;wxmsw$(wxShortVersionString)ud_qa.lib;wxmsw$(wxShortVersionString)ud_ribbon.lib;wxmsw$(wxShortVersionString)ud_richtext.lib;wxmsw$(wxShortVersionString)ud_stc.lib;wxmsw$(wxShortVersionString)ud_webview.lib;wxmsw$(wxShortVersionString)ud_xrc.lib;wxexpatd.lib;wxjpegd.lib;wxpngd.lib;wxregexud.lib;wxscintillad.lib;wxtiffd.lib;wxzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,13 +134,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxbase$(wxShortVersionString)ud.lib;wxbase$(wxShortVersionString)ud_net.lib;wxbase$(wxShortVersionString)ud_xml.lib;wxmsw$(wxShortVersionString)ud_adv.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxmsw$(wxShortVersionString)ud_core.lib;wxmsw$(wxShortVersionString)ud_gl.lib;wxmsw$(wxShortVersionString)ud_html.lib;wxmsw$(wxShortVersionString)ud_media.lib;wxmsw$(wxShortVersionString)ud_propgrid.lib;wxmsw$(wxShortVersionString)ud_qa.lib;wxmsw$(wxShortVersionString)ud_ribbon.lib;wxmsw$(wxShortVersionString)ud_richtext.lib;wxmsw$(wxShortVersionString)ud_stc.lib;wxmsw$(wxShortVersionString)ud_webview.lib;wxmsw$(wxShortVersionString)ud_xrc.lib;wxexpatd.lib;wxjpegd.lib;wxpngd.lib;wxregexud.lib;wxscintillad.lib;wxtiffd.lib;wxzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,13 +151,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxbase$(wxShortVersionString)ud.lib;wxbase$(wxShortVersionString)ud_net.lib;wxbase$(wxShortVersionString)ud_xml.lib;wxmsw$(wxShortVersionString)ud_adv.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxmsw$(wxShortVersionString)ud_core.lib;wxmsw$(wxShortVersionString)ud_gl.lib;wxmsw$(wxShortVersionString)ud_html.lib;wxmsw$(wxShortVersionString)ud_media.lib;wxmsw$(wxShortVersionString)ud_propgrid.lib;wxmsw$(wxShortVersionString)ud_qa.lib;wxmsw$(wxShortVersionString)ud_ribbon.lib;wxmsw$(wxShortVersionString)ud_richtext.lib;wxmsw$(wxShortVersionString)ud_stc.lib;wxmsw$(wxShortVersionString)ud_webview.lib;wxmsw$(wxShortVersionString)ud_xrc.lib;wxexpatd.lib;wxjpegd.lib;wxpngd.lib;wxregexud.lib;wxscintillad.lib;wxtiffd.lib;wxzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,7 +1,7 @@
 #include "Settings.h"
 #include <Windows.h>
 
-namespace am
+namespace AudioMaster
 {
 	bool SaveSetting(const char* appKey, const char* fieldKey, const char* dataValue)
 	{
