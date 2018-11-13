@@ -33,6 +33,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Core\Settings.h" />
+    <ClInclude Include="src\GUI\Project Frame\Displays\WaveformDisplay.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\GUI\Project Frame\Menus\FileMenu.h">
       <SubType>
       </SubType>
@@ -68,6 +72,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\Core\Settings.cpp" />
+    <ClCompile Include="src\GUI\Project Frame\Displays\WaveformDisplay.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\GUI\Project Frame\Menus\FileMenu.cpp">
       <SubType>
       </SubType>

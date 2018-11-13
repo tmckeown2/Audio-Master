@@ -10,6 +10,8 @@
 #include "Toolbars/ControlToolbar.h"
 #include "Toolbars/IOToolbar.h"
 
+#include "Displays/WaveformDisplay.h"
+
 // Include the core files used in every file
 #include "../../AudioMaster.h"
 
@@ -32,6 +34,9 @@ namespace AudioMaster
 		ControlToolbar* controlBar;
 		IOToolbar* ioBar;
 
+		// Displays
+		WaveformDisplay* waveformDisplay;
+
 	public:
 		ProjectFrame(wxString title, wxPoint pos, wxSize size, bool maximised);
 		~ProjectFrame();
@@ -43,6 +48,9 @@ namespace AudioMaster
 	private:
 		void InitMenus();
 		void InitToolbars();
+		void InitDisplays();
+
+		void UpdateDisplays();
 
 		wxDECLARE_EVENT_TABLE();
 	};
