@@ -33,6 +33,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Core\Settings.h" />
+    <ClInclude Include="src\GUI\Project Frame\Menus\FileMenu.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Project Frame\Menus\MenuBar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="src\GUI\Project Frame\ProjectFrame.h">
       <SubType>
       </SubType>
@@ -60,6 +68,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\Core\Settings.cpp" />
+    <ClCompile Include="src\GUI\Project Frame\Menus\FileMenu.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Project Frame\Menus\MenuBar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\GUI\Project Frame\ProjectFrame.cpp">
       <SubType>
       </SubType>

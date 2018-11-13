@@ -34,7 +34,12 @@ namespace AudioMaster
 		this->logger->Log("Initialising Advanced UI manager");
 		this->auiManager.SetManagedWindow(this);
 
+		// Initialise the menus
+		this->logger->Log("Initialising menu bar");
+		this->InitMenus();
+
 		// Initialise the toolbars
+		this->logger->Log("Initialising toolbars");
 		this->InitToolbars();
     }
 
@@ -42,6 +47,15 @@ namespace AudioMaster
     {
         this->auiManager.UnInit();
     }
+
+	void ProjectFrame::InitMenus()
+	{
+		// Create the menu bar
+		this->menuBar = new MenuBar();
+
+		// Set the menu bar
+		this->SetMenuBar(this->menuBar);
+	}
 
 	void ProjectFrame::InitToolbars()
 	{

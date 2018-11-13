@@ -1,5 +1,5 @@
-#ifndef INC_IOTOOLBAR_H
-#define INC_IOTOOLBAR_H
+#ifndef INC_IO_TOOLBAR_H
+#define INC_IO_TOOLBAR_H
 
 #include <wx/aui/auibar.h>
 #include <wx/frame.h>

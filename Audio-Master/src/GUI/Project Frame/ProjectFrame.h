@@ -1,9 +1,11 @@
-#ifndef INC_PROJECTFRAME_H
-#define INC_PROJECTFRAME_H
+#ifndef INC_PROJECT_FRAME_H
+#define INC_PROJECT_FRAME_H
 
 #include <wx/frame.h>
 #include <wx/event.h>
 #include <wx/aui/framemanager.h>
+
+#include "Menus/MenuBar.h"
 
 #include "Toolbars/ControlToolbar.h"
 #include "Toolbars/IOToolbar.h"
@@ -23,6 +25,9 @@ namespace AudioMaster
 		wxPoint pos;
 		wxSize size;
 
+		// Menus
+		MenuBar* menuBar;
+
 		// Toolbars
 		ControlToolbar* controlBar;
 		IOToolbar* ioBar;
@@ -36,6 +41,7 @@ namespace AudioMaster
 		void OnMove(wxMoveEvent& e);
 
 	private:
+		void InitMenus();
 		void InitToolbars();
 
 		wxDECLARE_EVENT_TABLE();
