@@ -19,7 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core.h" />
+    <ClInclude Include="src\App.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\AudioMaster.h" />
     <ClInclude Include="src\Core\DataManager.h">
       <SubType>
       </SubType>
@@ -29,8 +33,16 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="src\Core\Settings.h" />
+    <ClInclude Include="src\GUI\Project Frame\ProjectFrame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\App.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="src\Core\DataManager.cpp">
       <SubType>
       </SubType>
@@ -40,6 +52,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\Core\Settings.cpp" />
+    <ClCompile Include="src\GUI\Project Frame\ProjectFrame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

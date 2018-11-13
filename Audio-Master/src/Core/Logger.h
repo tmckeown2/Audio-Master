@@ -13,7 +13,7 @@ namespace AudioMaster
 	private:
 		static Logger* instance;
 
-		static std::ofstream logFile;
+		std::ofstream logFile;
 
 	public:
 		Logger();

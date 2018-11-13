@@ -1,0 +1,2 @@
+Initialising Project Frame
+Initialising Advanced UI manager
