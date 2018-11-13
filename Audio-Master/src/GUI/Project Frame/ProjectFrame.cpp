@@ -34,7 +34,16 @@ namespace AudioMaster
 		this->logger->Log("Initialising Advanced UI manager");
 		this->auiManager.SetManagedWindow(this);
 
+		// Initialise the displays - This MUST be before the menu init because for some reason it causes an access violation if you don't
+		this->logger->Log("Initialising displays");
+		this->InitDisplays();
+
+		// Initialise the menus
+		this->logger->Log("Initialising menu bar");
+		this->InitMenus();
+
 		// Initialise the toolbars
+		this->logger->Log("Initialising toolbars");
 		this->InitToolbars();
     }
 
@@ -42,6 +51,15 @@ namespace AudioMaster
     {
         this->auiManager.UnInit();
     }
+
+	void ProjectFrame::InitMenus()
+	{
+		// Create the menu bar
+		this->menuBar = new MenuBar();
+
+		// Set the menu bar
+		this->SetMenuBar(this->menuBar);
+	}
 
 	void ProjectFrame::InitToolbars()
 	{
@@ -80,6 +98,38 @@ namespace AudioMaster
 		this->auiManager.Update();
 	}
 
+	void ProjectFrame::InitDisplays()
+	{
+		// Create the displays
+		this->waveformDisplay = new WaveformDisplay(this, wxSize(this->GetSize().GetWidth() - 20, this->GetSize().GetHeight() / 4));
+
+		// Setup each display's pane info
+		wxAuiPaneInfo waveDisplayInfo;
+		waveDisplayInfo
+			.Name(_("WaveformDisplay"))
+			.Caption(_("Waveform Display"))
+			.DefaultPane()
+			.CloseButton(false)
+			.Top()
+			.LeftDockable(false)
+			.RightDockable(false)
+			.MinSize(wxSize(500, 200));
+
+		// Add the pane
+		this->auiManager.AddPane(this->waveformDisplay, waveDisplayInfo);
+
+		// Tell the manager to commit all the changes that were made
+		this->auiManager.Update();
+
+		// Refresh the displays
+		this->UpdateDisplays();
+	}
+
+	void ProjectFrame::UpdateDisplays()
+	{
+		this->waveformDisplay->Refresh();
+	}
+
 #pragma region FRAME EVENTS
 
 	void ProjectFrame::OnClose(wxCloseEvent& e)
@@ -104,6 +154,9 @@ namespace AudioMaster
 		{
 			this->size = e.GetSize();
 		}
+
+		// Update the displays
+		this->UpdateDisplays();
 	}
 
 	void ProjectFrame::OnMove(wxMoveEvent& WXUNUSED(e))

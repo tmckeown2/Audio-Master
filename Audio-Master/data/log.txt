@@ -1,4 +1,7 @@
 Initialising Project Frame
 Initialising Advanced UI manager
+Initialising displays
+Initialising menu bar
+Initialising toolbars
 Initialising Control Toolbar
 Initialising IO Toolbar

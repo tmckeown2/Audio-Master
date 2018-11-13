@@ -1,5 +1,5 @@
-#ifndef INC_CONTROLTOOLBAR_H
-#define INC_CONTROLTOOLBAR_H
+#ifndef INC_CONTROL_TOOLBAR_H
+#define INC_CONTROL_TOOLBAR_H
 
 #include <wx/aui/auibar.h>
 #include <wx/frame.h>
