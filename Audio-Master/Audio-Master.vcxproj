@@ -37,6 +37,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\GUI\Project Frame\Toolbars\ControlToolbar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Project Frame\Toolbars\IOToolbar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp">
@@ -53,6 +61,14 @@
     </ClCompile>
     <ClCompile Include="src\Core\Settings.cpp" />
     <ClCompile Include="src\GUI\Project Frame\ProjectFrame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Project Frame\Toolbars\ControlToolbar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Project Frame\Toolbars\IOToolbar.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -5,6 +5,9 @@
 #include <wx/event.h>
 #include <wx/aui/framemanager.h>
 
+#include "Toolbars/ControlToolbar.h"
+#include "Toolbars/IOToolbar.h"
+
 // Include the core files used in every file
 #include "../../AudioMaster.h"
 
@@ -20,6 +23,10 @@ namespace AudioMaster
 		wxPoint pos;
 		wxSize size;
 
+		// Toolbars
+		ControlToolbar* controlBar;
+		IOToolbar* ioBar;
+
 	public:
 		ProjectFrame(wxString title, wxPoint pos, wxSize size, bool maximised);
 		~ProjectFrame();
@@ -29,7 +36,8 @@ namespace AudioMaster
 		void OnMove(wxMoveEvent& e);
 
 	private:
-		
+		void InitToolbars();
+
 		wxDECLARE_EVENT_TABLE();
 	};
 	

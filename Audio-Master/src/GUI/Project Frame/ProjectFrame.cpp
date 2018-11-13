@@ -33,12 +33,52 @@ namespace AudioMaster
 		// Initialise the AUI manager
 		this->logger->Log("Initialising Advanced UI manager");
 		this->auiManager.SetManagedWindow(this);
+
+		// Initialise the toolbars
+		this->InitToolbars();
     }
 
     ProjectFrame::~ProjectFrame()
     {
         this->auiManager.UnInit();
     }
+
+	void ProjectFrame::InitToolbars()
+	{
+		// Create the toolbars
+		this->controlBar = new ControlToolbar(this);
+		this->ioBar = new IOToolbar(this);
+
+		// Setup each toolbar's pane info
+		wxAuiPaneInfo controlBarInfo;
+		controlBarInfo
+			.Name("ControlToolbar")
+			.Caption("Control Toolbar")
+			.ToolbarPane()
+			.Top()
+			.LeftDockable(false)
+			.RightDockable(false)
+			.BottomDockable(false)
+			.Floatable(false);
+
+		wxAuiPaneInfo ioBarInfo;
+		ioBarInfo
+			.Name("IOToolbar")
+			.Caption("IO Toolbar")
+			.ToolbarPane()
+			.Top()
+			.LeftDockable(false)
+			.RightDockable(false)
+			.BottomDockable(false)
+			.Floatable(false);
+
+		// Add the toolbars as AUI panes
+		this->auiManager.AddPane(this->controlBar, controlBarInfo);
+		this->auiManager.AddPane(this->ioBar, ioBarInfo);
+
+		// Tell the manager to commit all the changes that were made
+		this->auiManager.Update();
+	}
 
 #pragma region FRAME EVENTS
 
@@ -76,4 +116,5 @@ namespace AudioMaster
 	}
 
 #pragma endregion
+
 }

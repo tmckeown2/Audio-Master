@@ -33,6 +33,12 @@
     <ClInclude Include="src\GUI\Project Frame\ProjectFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\GUI\Project Frame\Toolbars\ControlToolbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI\Project Frame\Toolbars\IOToolbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Settings.cpp">
@@ -48,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GUI\Project Frame\ProjectFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Project Frame\Toolbars\ControlToolbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Project Frame\Toolbars\IOToolbar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
