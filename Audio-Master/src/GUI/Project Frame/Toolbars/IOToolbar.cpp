@@ -15,9 +15,21 @@ namespace AudioMaster
 
 		this->logger->Log("Initialising IO Toolbar");
 
+		// Get the sound manager
+		this->soundManager = SoundManager::GetInstance();
+
 		// Populate the combo boxes (input and output)
 		PopulateInputs();
 		PopulateOutputs();
+
+		// Initialise the combo boxes (input and output)
+		this->inputDevices = new wxComboBox(this, wxID_ANY, wxEmptyString);
+		this->inputDevices->Set(this->inputArray);
+		this->inputDevices->SetSelection(0);
+		
+		this->outputDevices = new wxComboBox(this, wxID_ANY, wxEmptyString);
+		this->outputDevices->Set(this->outputArray);
+		this->outputDevices->SetSelection(0);
 
 		// Initialise the tools and their images
 		InitImages();
@@ -29,7 +41,8 @@ namespace AudioMaster
 
     IOToolbar::~IOToolbar()
     {
-        
+        delete this->inputDevices;
+		delete this->outputDevices;
     }
 
 	void IOToolbar::InitImages()
@@ -44,16 +57,30 @@ namespace AudioMaster
 	void IOToolbar::InitTools()
 	{
 		// Add all the tools
+		this->AddControl(this->inputDevices,  _("Input  Devices"));
+		
+		this->AddSpacer(10);
 
+		this->AddControl(this->outputDevices, _("Output Devices"));
 	}
 
 	void IOToolbar::PopulateInputs()
 	{
+		std::vector<std::string> inputs = this->soundManager->GetInputDevices();
 
+		for (auto it = inputs.begin(); it != inputs.end(); ++it)
+		{
+			this->inputArray.Add(*it);
+		}
 	}
 	
 	void IOToolbar::PopulateOutputs()
 	{
+		std::vector<std::string> outputs = this->soundManager->GetOutputDevices();
 
+		for (auto it = outputs.begin(); it != outputs.end(); ++it)
+		{
+			this->outputArray.Add(*it);
+		}
 	}
 }
