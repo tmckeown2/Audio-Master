@@ -5,6 +5,8 @@
 #include <wx/event.h>
 #include <wx/aui/framemanager.h>
 
+#include "../../Sound/SoundManager.h"
+
 #include "Menus/MenuBar.h"
 
 #include "Toolbars/ControlToolbar.h"

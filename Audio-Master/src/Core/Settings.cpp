@@ -35,7 +35,8 @@ namespace AudioMaster
 		TCHAR value[1000];
 		GetPrivateProfileString(appKey, fieldKey, defaultValue, value, sizeof(value) / sizeof(value[0]), SETTINGS_FILE_PATH);
 
-		return value;
+		// Return the data in value not the address
+		return std::string(value).c_str();
 	}
 	int LoadSetting(const char* appKey, const char* fieldKey, int defaultValue)
 	{

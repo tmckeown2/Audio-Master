@@ -49,6 +49,8 @@ namespace AudioMaster
 
     ProjectFrame::~ProjectFrame()
     {
+		SoundManager::ResetInstance();
+
         this->auiManager.UnInit();
     }
 
