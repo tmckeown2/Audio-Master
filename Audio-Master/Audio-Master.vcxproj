@@ -57,6 +57,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\Sound\SoundManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp">
@@ -93,6 +97,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\GUI\Project Frame\Toolbars\IOToolbar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\Sound\SoundManager.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -170,11 +178,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win32;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win32\EFX-Util_MT;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;OpenAL32.lib;EFX-Util.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -183,11 +192,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win64\EFX-Util_MT;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win64;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;OpenAL32.lib;EFX-Util.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -198,13 +208,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win32;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win32\EFX-Util_MT;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;OpenAL32.lib;EFX-Util.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -215,13 +226,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\wxWidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win64;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\OpenAL\Win64\EFX-Util_MT;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxmsw$(wxShortVersionString)ud_core.lib;wxbase$(wxShortVersionString)ud.lib;wxmsw$(wxShortVersionString)ud_aui.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;shlwapi.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;version.lib;wsock32.lib;wininet.lib;OpenAL32.lib;EFX-Util.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
