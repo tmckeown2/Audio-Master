@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <thread>
 
 #include "al.h"
 #include "alc.h"
@@ -11,6 +12,8 @@
 #include "EFX-Util.h"
 #include "xram.h"
 
+#include "../Core/Logger.h"
+
 namespace AudioMaster
 {
 
@@ -18,10 +21,20 @@ namespace AudioMaster
 	{
 	private:
 		static SoundManager* instance;
+		static Logger* logger;
+		
+		static ALenum errorCode;
 
-		ALCdevice* input;
-		ALCdevice* output;
+		static const char* inputDeviceStr;
+		static ALCdevice* input;
+		static ALCuint inputFrequency;
+		static ALCenum inputFormat;
+		static ALCsizei inputBufferSize;
+		static ALbyte* inputBuffer;
 
+		static bool recording;
+
+		static std::thread recordingThread;
 	public:
 		SoundManager();
 		~SoundManager();
@@ -36,9 +49,22 @@ namespace AudioMaster
 		std::vector<std::string> GetInputDevices();
 		std::vector<std::string> GetOutputDevices();
 
-		bool SetInput(std::string inputDevice);
-		bool SetOutput(std::string outputDevice);
+		bool SetInput(const char* inputDevice);
+		bool SetOutput(const char* outputDevice);
 
+		void SetInputFrequency(unsigned int frequency);
+		void SetBufferSize(int size);
+
+		void Import(std::string file);
+		void Export(std::string file);
+
+		void Play();
+		void Pause();
+		void Record();
+		void Stop();
+
+	private:
+		static void Capture();
 	};
 	
 }
