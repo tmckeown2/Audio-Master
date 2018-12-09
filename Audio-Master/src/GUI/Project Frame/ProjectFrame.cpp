@@ -49,6 +49,8 @@ namespace AudioMaster
 
     ProjectFrame::~ProjectFrame()
     {
+		// Stop any playback or recording if any are happening
+		SoundManager::GetInstance()->Stop();
 		SoundManager::ResetInstance();
 
         this->auiManager.UnInit();

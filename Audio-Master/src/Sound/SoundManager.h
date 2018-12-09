@@ -7,12 +7,12 @@
 
 #include "al.h"
 #include "alc.h"
-#include "efx.h"
-#include "efx-creative.h"
-#include "EFX-Util.h"
-#include "xram.h"
 
-#include "../Core/Logger.h"
+#include "../AudioMaster.h"
+#include "Utils/Sound.h"
+#include "Utils/Recorder.h"
+#include "Utils/Player.h"
+#include "Wrappers/Wave Wrapper/WaveWrapper.h"
 
 namespace AudioMaster
 {
@@ -25,16 +25,13 @@ namespace AudioMaster
 		
 		static ALenum errorCode;
 
-		static const char* inputDeviceStr;
-		static ALCdevice* input;
-		static ALCuint inputFrequency;
-		static ALCenum inputFormat;
-		static ALCsizei inputBufferSize;
-		static ALbyte* inputBuffer;
-
 		static bool recording;
 
 		static std::thread recordingThread;
+
+		Sound sound;
+		Recorder r;
+		Player p;
 	public:
 		SoundManager();
 		~SoundManager();
@@ -62,9 +59,6 @@ namespace AudioMaster
 		void Pause();
 		void Record();
 		void Stop();
-
-	private:
-		static void Capture();
 	};
 	
 }

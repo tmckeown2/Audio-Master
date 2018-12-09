@@ -5,8 +5,3 @@ Initialising menu bar
 Initialising toolbars
 Initialising Control Toolbar
 Initialising IO Toolbar
-Started recording
-Started recording thread
-Stopping...
-Stopped recording thread
-Stopped recording

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -61,6 +61,20 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="src\Sound\Utils\Player.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Sound\Utils\Recorder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\Sound\Utils\Sound.h" />
+    <ClInclude Include="src\Sound\Wrappers\ISoundWrapper.h" />
+    <ClInclude Include="src\Sound\Wrappers\Wave Wrapper\WaveWrapper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp">
@@ -101,6 +115,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="src\Sound\SoundManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\Sound\Utils\Player.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\Sound\Utils\Recorder.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\Sound\Wrappers\Wave Wrapper\WaveWrapper.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -1,6 +1,8 @@
 #include "SoundManager.h"
+#include <fstream>
 
-// TODO: PRIORITY!!! Recording MUST be done on a separate thread to avoid the crashing
+// TODO: PRIORITY!!! Record to file (temp fix. Should really record to Virtual Memory Pages) 
+// TODO: Read in the file for WaveDisplay (implement own WaveHeader reading for cross platform)
 
 namespace AudioMaster
 {
@@ -8,13 +10,6 @@ namespace AudioMaster
 	Logger*		  SoundManager::logger   = nullptr;
 
 	ALenum SoundManager::errorCode = 0;
-
-	const char* SoundManager::inputDeviceStr  = "";
-	ALCdevice*	SoundManager::input			  = nullptr;
-	ALCuint		SoundManager::inputFrequency  = 0;
-	ALCenum		SoundManager::inputFormat	  = 0;
-	ALCsizei	SoundManager::inputBufferSize = 0;
-	ALbyte*		SoundManager::inputBuffer	  = nullptr;
 
 	bool SoundManager::recording = false;
 
@@ -27,31 +22,17 @@ namespace AudioMaster
 
 		this->errorCode = AL_NO_ERROR;
 
-		this->input = nullptr;
-		this->inputFormat = AL_FORMAT_MONO16;
-		this->inputFrequency = 48000; // DVD standard
-		this->inputBufferSize = this->inputFrequency; // 1 second buffer size
-		this->inputBuffer = new ALbyte[this->inputBufferSize];
-
-		this->SetInput(NULL);
-		this->SetOutput(NULL);
+		// Set default input/output device strings
+		this->SetInput (alGetString(ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER));
+		this->SetOutput(alGetString(ALC_DEFAULT_DEVICE_SPECIFIER));
 
 		this->recording = false;
+
+		this->sound = Sound();
     }
     SoundManager::~SoundManager()
     {
-		//delete this->input;
-		//delete this->output;
 
-		alcCaptureStop(this->input);
-		alcCaptureCloseDevice(this->input);
-		//alcCloseDevice(this->output);
-
-		delete[] this->inputBuffer;
-		//delete[] this->source;
-
-		this->input = nullptr;
-		//this->output = nullptr;
     }
 
 	SoundManager* SoundManager::GetInstance()
@@ -157,7 +138,7 @@ namespace AudioMaster
 		return outputDevices;
 	}
 
-	bool SoundManager::SetInput(const char* input)
+	bool SoundManager::SetInput (const char* input)
 	{
 		if (recording)
 		{
@@ -165,109 +146,67 @@ namespace AudioMaster
 			return false;
 		}
 
-		this->inputDeviceStr = input;
-
 		return true;
 	}
 	bool SoundManager::SetOutput(const char* output)
 	{
-		//this->output = alcOpenDevice(output);
-		//this->errorCode = alcGetError(this->output);
-
-		if (this->errorCode != ALC_NO_ERROR)
-		{
-			// TODO: Log error - return false
-			return false;
-		}
-
-		// Create a context
-		//this->context = alcCreateContext(this->output, NULL);
-		//alcMakeContextCurrent(this->context);
-
-		//this->errorCode = alcGetError(this->output);
-
-		if (this->errorCode != ALC_NO_ERROR)
-		{
-			// TODO: Log error - return false
-			return false;
-		}
 
 		return true;
 	}
 
 	void SoundManager::SetInputFrequency(unsigned int frequency)
 	{
-		this->inputFrequency = frequency;
+		this->sound.sampleRate = frequency;
 	}
 	void SoundManager::SetBufferSize(int size)
 	{
-		this->inputBufferSize = size;
+		
 	}
 
 	void SoundManager::Import(std::string file)
 	{
+		// TODO: Add file type validation to import/export functions
+		// TODO: Make import/export functions actually do something with sound data
 
+		WaveWrapper f = WaveWrapper();
+		Sound s = f.Import(file.c_str());
 	}
 	void SoundManager::Export(std::string file)
 	{
-
+		WaveWrapper f = WaveWrapper();
+		f.Export(file.c_str(), this->sound);
 	}
 
 	void SoundManager::Play()
 	{
-		
+		p.Start();
 	}
 	void SoundManager::Pause()
 	{
-
+		p.Pause();
 	}
 	void SoundManager::Record()
 	{
-		SoundManager::input = alcCaptureOpenDevice(SoundManager::inputDeviceStr, SoundManager::inputFrequency, SoundManager::inputFormat, SoundManager::inputBufferSize);
-		SoundManager::errorCode = alcGetError(SoundManager::input);
+		r.SetFormat(AL_FORMAT_MONO16);
+		r.SetSampleRate(44100);
 
-		if (SoundManager::errorCode != ALC_NO_ERROR)
-		{
-			SoundManager::logger->Log("Unable to open input device");
-			return;
-		}
-
-		SoundManager::recording = true;
-		SoundManager::logger->Log("Started recording");
-
-		// Start the recording thread
-		SoundManager::recordingThread = std::thread([&](SoundManager* sm) { sm->Capture(); }, this);
-		SoundManager::recordingThread.detach();
+		r.Start();
+		this->recording = true;
 	}
 	void SoundManager::Stop()
 	{
-		this->logger->Log("Stopping...");
-
-		if (recording)
+		if (this->recording)
 		{
-			recording = false;
-			
-			alcCaptureStop(this->input);
-			alcCaptureCloseDevice(this->input);
+			r.Stop();
 
-			this->logger->Log("Stopped recording");
-		}
-	}
+			this->sound = r.GetSound();
+			p.SetSound(this->sound);
 
-	void SoundManager::Capture()
-	{
-		ALint sample;
+			this->Export("test.wav");
 
-		SoundManager::logger->Log("Started recording thread");
-		while (SoundManager::recording)
-		{
-			alcGetIntegerv(SoundManager::input, ALC_CAPTURE_SAMPLES, (ALCsizei)sizeof(ALint), &sample);
-			alcCaptureSamples(SoundManager::input, (ALCvoid*)SoundManager::inputBuffer, sample);
-
-			// Output to a file
-
+			this->recording = false;
 		}
 
-		SoundManager::logger->Log("Stopped recording thread");
+		p.Stop();
 	}
 }

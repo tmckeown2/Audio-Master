@@ -63,9 +63,9 @@ namespace AudioMaster
 	void ControlToolbar::InitTools()
 	{
 		// Add all the tools
-		this->AddTool(CONTROL_TOOL_PLAY,   _("Play"),   this->toolImg[CONTROL_TOOL_PLAY  ], _("Starts Playback"		  ));
-		this->AddTool(CONTROL_TOOL_PAUSE,  _("Pause"),  this->toolImg[CONTROL_TOOL_PAUSE ], _("Pauses Playback"		  ));
-		this->AddTool(CONTROL_TOOL_RECORD, _("Record"), this->toolImg[CONTROL_TOOL_RECORD], _("Starts Recording"		  ));
+		this->AddTool(CONTROL_TOOL_PLAY,   _("Play"),   this->toolImg[CONTROL_TOOL_PLAY  ], _("Starts Playback"		    ));
+		this->AddTool(CONTROL_TOOL_PAUSE,  _("Pause"),  this->toolImg[CONTROL_TOOL_PAUSE ], _("Pauses Playback"		    ));
+		this->AddTool(CONTROL_TOOL_RECORD, _("Record"), this->toolImg[CONTROL_TOOL_RECORD], _("Starts Recording"		));
 		this->AddTool(CONTROL_TOOL_STOP,   _("Stop"),   this->toolImg[CONTROL_TOOL_STOP  ], _("Stops Playback/Recording"));
 	}
 
