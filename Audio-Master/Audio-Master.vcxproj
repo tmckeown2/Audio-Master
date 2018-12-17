@@ -204,7 +204,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\include\rapidjson;$(SolutionDir)\lib\include\OpenAL;$(SolutionDir)\lib\libs\wxWidgets\mswud;$(SolutionDir)\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -218,7 +218,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\include\rapidjson;$(SolutionDir)\lib\include\OpenAL;$(SolutionDir)\lib\libs\wxWidgets\mswud;$(SolutionDir)\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -234,7 +234,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\include\rapidjson;$(SolutionDir)\lib\include\OpenAL;$(SolutionDir)\lib\libs\wxWidgets\mswud;$(SolutionDir)\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -252,7 +252,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\OpenAL;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\libs\wxWidgets\mswud;D:\Uni\3rd Year Project\Project Solution\Audio-Master\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\lib\include\rapidjson;$(SolutionDir)\lib\include\OpenAL;$(SolutionDir)\lib\libs\wxWidgets\mswud;$(SolutionDir)\lib\include\wxWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

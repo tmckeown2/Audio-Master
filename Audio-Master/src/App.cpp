@@ -42,11 +42,11 @@ namespace AudioMaster
 
 	void App::SetDefaultSettings()
 	{
-		// Create the data directory (won't do anything if the file exists)
-		bool t = CreateDir(DATA_DIR);
+		// Create the data directory (won't do anything if the directory exists)
+		bool fileCheck = CreateDir(DATA_DIR);
 
 		// Create a new settings file (won't do anything if the file exists)
-		t = CreateSettingsFile();
+		fileCheck = CreateSettingsFile();
 
 		bool saved = true;
 

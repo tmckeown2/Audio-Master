@@ -1,12 +1,49 @@
 #include "Settings.h"
+
+//rapidjson
+#include "document.h" 
+#include "writer.h"
+#include "stringbuffer.h"
+
 #include <Windows.h>
+#include <fstream>
 #include <string>
 
 namespace AudioMaster
 {
 	bool CreateSettingsFile()
 	{
-		return CreateFile(SETTINGS_FILE_PATH, GENERIC_ALL, 0, 0, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
+		/*
+		{
+			"window": 
+			{
+				"x":-1,
+				"y":-1,
+				"width":-1,
+				"height":-1
+			}
+		}
+		*/
+		const char* json = "{\"window\":{\"x\":-1,\"y\":-1,\"width\":-1,\"height\":-1,\"fullscreen\":0}}";
+		rapidjson::Document d;
+		d.Parse(json);
+
+		rapidjson::Value& s = d["x"];
+		s.SetInt(100);
+
+		rapidjson::StringBuffer buffer;
+		rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+		d.Accept(writer);
+
+		std::ofstream file(SETTINGS_FILE_PATH);
+
+		if (!file || file.fail())
+		{
+			return false;
+		}
+
+		return true;
+		//return CreateFile(SETTINGS_FILE_PATH, GENERIC_ALL, 0, 0, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
 	}
 
 	bool SaveSetting(const char* appKey, const char* fieldKey, const char* dataValue)

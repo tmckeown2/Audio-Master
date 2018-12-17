@@ -3,7 +3,7 @@
 
 namespace AudioMaster
 {
-	constexpr const char* SETTINGS_FILE_PATH = "data\\settings.ini";
+	constexpr const char* SETTINGS_FILE_PATH = "data\\settings.json";
 
 	bool CreateSettingsFile();
 
