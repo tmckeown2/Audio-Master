@@ -21,7 +21,7 @@ namespace AudioMaster
 		wxTheApp->SetAppDisplayName(AudioMaster::PROJECT_DISPLAY_NAME);
 
 		// Load settings
-		if (LoadSetting(MAIN_APP_KEY, FRESH_INSTALL_KEY, FRESH_INSTALL_DEFAULT) == FRESH_INSTALL_DEFAULT)
+		if (LoadSetting("installed", false) == false)
 			this->SetDefaultSettings();
 		else
 			this->LoadSettings();
@@ -42,38 +42,31 @@ namespace AudioMaster
 
 	void App::SetDefaultSettings()
 	{
-		// Create the data directory (won't do anything if the directory exists)
-		bool fileCheck = CreateDir(DATA_DIR);
+		// Create the settings file
+		CreateSettingsFile();
 
-		// Create a new settings file (won't do anything if the file exists)
-		fileCheck = CreateSettingsFile();
-
-		bool saved = true;
-
-		// Set fresh install to false
-		saved = SaveSetting(MAIN_APP_KEY, FRESH_INSTALL_KEY, false);
+		// Set main application fresh install to true
+		SaveSetting("installed", true);
 
 		// Set main window values to default
-		saved = SaveSetting(MAIN_WINDOW_KEY, WINDOW_X_KEY,		WINDOW_X_DEFAULT	 );
-		saved = SaveSetting(MAIN_WINDOW_KEY, WINDOW_Y_KEY,		WINDOW_Y_DEFAULT	 );
-		saved = SaveSetting(MAIN_WINDOW_KEY, WINDOW_WIDTH_KEY,  WINDOW_WIDTH_DEFAULT );
-		saved = SaveSetting(MAIN_WINDOW_KEY, WINDOW_HEIGHT_KEY, WINDOW_HEIGHT_DEFAULT);
-		saved = SaveSetting(MAIN_WINDOW_KEY, WINDOW_MAX_KEY,    WINDOW_MAX_DEFAULT   );
+		SaveSetting("x", -1);
+		SaveSetting("y", -1);
+		SaveSetting("width", -1);
+		SaveSetting("height", -1);
 
-		if (saved)
-			this->logger->Log("Saved default settings");
-		else
-			this->logger->Log("Unable to save default settings");
+		SaveSetting("fullscreen", false);
+
+		this->logger->Log("Saved default settings");
 	}
 
 	void App::LoadSettings()
 	{
-		this->windowPos.x = LoadSetting(MAIN_WINDOW_KEY, WINDOW_X_KEY, WINDOW_X_DEFAULT);
-		this->windowPos.y = LoadSetting(MAIN_WINDOW_KEY, WINDOW_Y_KEY, WINDOW_Y_DEFAULT);
+		this->windowPos.x = LoadSetting("x", -1);
+		this->windowPos.y = LoadSetting("y", -1);
 
-		this->windowSize.SetWidth (LoadSetting(MAIN_WINDOW_KEY, WINDOW_WIDTH_KEY,  WINDOW_WIDTH_DEFAULT ));
-		this->windowSize.SetHeight(LoadSetting(MAIN_WINDOW_KEY, WINDOW_HEIGHT_KEY, WINDOW_HEIGHT_DEFAULT));
+		this->windowSize.SetWidth (LoadSetting("width",  -1));
+		this->windowSize.SetHeight(LoadSetting("height", -1));
 		
-		this->windowMax = LoadSetting(MAIN_WINDOW_KEY, WINDOW_MAX_KEY, WINDOW_MAX_DEFAULT);
+		this->windowMax = LoadSetting("fullscreen", false);
 	}
 }

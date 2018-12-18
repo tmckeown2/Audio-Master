@@ -1,102 +1,84 @@
 #include "Settings.h"
-
-//rapidjson
-#include "document.h" 
-#include "writer.h"
-#include "stringbuffer.h"
-
-#include <Windows.h>
-#include <fstream>
 #include <string>
+
+#include "JsonBox.h"
 
 namespace AudioMaster
 {
 	bool CreateSettingsFile()
 	{
-		/*
-		{
-			"window": 
-			{
-				"x":-1,
-				"y":-1,
-				"width":-1,
-				"height":-1
-			}
-		}
-		*/
-		const char* json = "{\"window\":{\"x\":-1,\"y\":-1,\"width\":-1,\"height\":-1,\"fullscreen\":0}}";
-		rapidjson::Document d;
-		d.Parse(json);
+		JsonBox::Object windowObj;
 
-		rapidjson::Value& s = d["x"];
-		s.SetInt(100);
-
-		rapidjson::StringBuffer buffer;
-		rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-		d.Accept(writer);
-
-		std::ofstream file(SETTINGS_FILE_PATH);
-
-		if (!file || file.fail())
-		{
-			return false;
-		}
+		JsonBox::Value v(windowObj);
+		v.writeToFile(SETTINGS_FILE_PATH);
 
 		return true;
-		//return CreateFile(SETTINGS_FILE_PATH, GENERIC_ALL, 0, 0, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
 	}
 
-	bool SaveSetting(const char* appKey, const char* fieldKey, const char* dataValue)
+	void SaveSetting(const char* setting, JsonBox::Value value)
 	{
-		return WritePrivateProfileString(appKey, fieldKey, dataValue, SETTINGS_FILE_PATH);
-	}
-	bool SaveSetting(const char* appKey, const char* fieldKey, int dataValue)
-	{
-		return WritePrivateProfileString(appKey, fieldKey, std::to_string(dataValue).c_str(), SETTINGS_FILE_PATH);
-	}
-	bool SaveSetting(const char* appKey, const char* fieldKey, bool dataValue)
-	{
-		return WritePrivateProfileString(appKey, fieldKey, std::to_string(dataValue).c_str(), SETTINGS_FILE_PATH);
-	}
-	bool SaveSetting(const char* appKey, const char* fieldKey, float dataValue)
-	{
-		return WritePrivateProfileString(appKey, fieldKey, std::to_string(dataValue).c_str(), SETTINGS_FILE_PATH);
-	}
-	bool SaveSetting(const char* appKey, const char* fieldKey, double dataValue)
-	{
-		return WritePrivateProfileString(appKey, fieldKey, std::to_string(dataValue).c_str(), SETTINGS_FILE_PATH);
+		// Load the current settings
+		JsonBox::Value file;
+		file.loadFromFile(SETTINGS_FILE_PATH);
+
+		// Save the setting (updates the existing setting or creates a new one if it doesn't exist)
+		file[setting] = value;
+
+		// Write the new settings file
+		file.writeToFile(SETTINGS_FILE_PATH);
 	}
 
-	const char* LoadSetting(const char* appKey, const char* fieldKey, const char* defaultValue)
+	void SaveSetting(const char* setting, const char* value)
 	{
-		TCHAR value[1000];
-		GetPrivateProfileString(appKey, fieldKey, defaultValue, value, sizeof(value) / sizeof(value[0]), SETTINGS_FILE_PATH);
+		SaveSetting(setting, JsonBox::Value(value));
+	}
+	void SaveSetting(const char* setting, int value)
+	{
+		SaveSetting(setting, JsonBox::Value(value));
+	}
+	void SaveSetting(const char* setting, double value)
+	{
+		SaveSetting(setting, JsonBox::Value(value));
+	}
+	void SaveSetting(const char* setting, bool value)
+	{
+		SaveSetting(setting, JsonBox::Value(value));
+	}
 
-		// Return the data in value not the address
-		return std::string(value).c_str();
-	}
-	int LoadSetting(const char* appKey, const char* fieldKey, int defaultValue)
+	const char* LoadSetting(const char* setting, const char* defaultValue)
 	{
-		return GetPrivateProfileInt(appKey, fieldKey, defaultValue, SETTINGS_FILE_PATH);
-	}
-	bool LoadSetting(const char* appKey, const char* fieldKey, bool defaultValue)
-	{
-		return GetPrivateProfileInt(appKey, fieldKey, defaultValue, SETTINGS_FILE_PATH);
-	}
-	float LoadSetting(const char* appKey, const char* fieldKey, float defaultValue)
-	{
-		TCHAR value[1000];
-		std::string::size_type sz;
-		GetPrivateProfileString(appKey, fieldKey, std::to_string(defaultValue).c_str(), value, sizeof(value) / sizeof(value[0]), SETTINGS_FILE_PATH);
+		// Load the current settings
+		JsonBox::Value file;
+		file.loadFromFile(SETTINGS_FILE_PATH);
 
-		return std::stof(value, &sz);
+		// Try to get the string setting, if it is not there then return the default
+		return file[setting].tryGetString(defaultValue).c_str();
 	}
-	double LoadSetting(const char* appKey, const char* fieldKey, double defaultValue)
+	int LoadSetting(const char* setting, int defaultValue)
 	{
-		TCHAR value[1000];
-		std::string::size_type sz;
-		GetPrivateProfileString(appKey, fieldKey, std::to_string(defaultValue).c_str(), value, sizeof(value) / sizeof(value[0]), SETTINGS_FILE_PATH);
+		// Load the current settings
+		JsonBox::Value file;
+		file.loadFromFile(SETTINGS_FILE_PATH);
 
-		return std::stod(value, &sz);
+		// Try to get the int setting, if it is not there then return the default
+		return file[setting].tryGetInteger(defaultValue);
+	}
+	double LoadSetting(const char* setting, double defaultValue)
+	{
+		// Load the current settings
+		JsonBox::Value file;
+		file.loadFromFile(SETTINGS_FILE_PATH);
+
+		// Try to get the double setting, if it is not there then return the default
+		return file[setting].tryGetDouble(defaultValue);
+	}
+	bool LoadSetting(const char* setting, bool defaultValue)
+	{
+		// Load the current settings
+		JsonBox::Value file;
+		file.loadFromFile(SETTINGS_FILE_PATH);
+
+		// Try to get the bool setting, if it is not there then return the default
+		return file[setting].tryGetBoolean(defaultValue);
 	}
 }

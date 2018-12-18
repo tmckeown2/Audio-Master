@@ -139,13 +139,12 @@ namespace AudioMaster
 	void ProjectFrame::OnClose(wxCloseEvent& e)
 	{
 		// Save the new main window settings (position, size, and maximised)
-		SaveSetting(MAIN_WINDOW_KEY, WINDOW_X_KEY, this->pos.x);
-		SaveSetting(MAIN_WINDOW_KEY, WINDOW_Y_KEY, this->pos.y);
+		SaveSetting("x", this->pos.x);
+		SaveSetting("y", this->pos.y);
+		SaveSetting("width",  this->size.GetWidth ());
+		SaveSetting("height", this->size.GetHeight());
 
-		SaveSetting(MAIN_WINDOW_KEY, WINDOW_WIDTH_KEY,  this->size.GetWidth ());
-		SaveSetting(MAIN_WINDOW_KEY, WINDOW_HEIGHT_KEY, this->size.GetHeight());
-
-		SaveSetting(MAIN_WINDOW_KEY, WINDOW_MAX_KEY, this->IsMaximized());
+		SaveSetting("fullscreen", this->IsMaximized());
 
 		// Call the base class close function
 		e.Skip();
