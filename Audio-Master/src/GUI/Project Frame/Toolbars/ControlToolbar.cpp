@@ -56,7 +56,11 @@ namespace AudioMaster
 		// Do not want to cause a crash because an image did not load correctly, it is not a fatal issue.
 		for (int i = 0; i < CONTROL_TOOL_MAX; ++i)
 		{
-			this->toolImg[i] = wxBitmap(icons[i], wxBITMAP_TYPE_PNG);
+			wxImage temp = wxImage("D:\\Uni\\3rd Year Project\\Project Solution\\Audio-Master\\Audio-Master\\res\\" + icons[i]);
+			temp = temp.Rescale(30, 30, wxImageResizeQuality::wxIMAGE_QUALITY_HIGH);
+			this->toolImg[i] = wxBitmap(temp);
+
+			//this->toolImg[i] = wxBitmap("D:\\Uni\\3rd Year Project\\Project Solution\\Audio-Master\\Audio-Master\\res\\" + icons[i], wxBITMAP_TYPE_PNG);
 		}
 	}
 

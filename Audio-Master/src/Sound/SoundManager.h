@@ -52,6 +52,8 @@ namespace AudioMaster
 		void SetInputFrequency(unsigned int frequency);
 		void SetBufferSize(int size);
 
+		Sound* GetSound();
+
 		void Import(std::string file);
 		void Export(std::string file);
 

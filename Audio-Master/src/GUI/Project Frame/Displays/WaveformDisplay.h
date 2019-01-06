@@ -1,6 +1,8 @@
 #ifndef INC_WAVEFORM_DISPLAY_H
 #define INC_WAVEFORM_DISPLAY_H
 
+#include "..\..\..\Sound\SoundManager.h"
+
 #include <wx/frame.h>
 #include <wx/scrolwin.h>
 #include <wx/panel.h>
@@ -17,6 +19,8 @@ namespace AudioMaster
 		int scrollMultiplier;
 		int scrolled;
 
+		int displayHeight;
+
 	public:
 		WaveformDisplay(wxFrame* parent, wxSize size);
 		~WaveformDisplay();
@@ -25,6 +29,7 @@ namespace AudioMaster
 
 		void OnPaint(wxPaintEvent& e);
 		void OnScroll(wxMouseEvent& e);
+		void OnResize(wxSizeEvent& e);
 
 	private:
 		void Render(wxDC& dc);

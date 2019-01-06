@@ -1,3 +1,6 @@
 [submodule "lib/wxWidgets"]
 	path = lib/wxWidgets
 	url = https://github.com/wxWidgets/wxWidgets
+[submodule "lib/nlohmann-json"]
+	path = lib/nlohmann-json
+	url = https://github.com/nlohmann/json

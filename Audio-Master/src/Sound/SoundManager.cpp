@@ -163,6 +163,12 @@ namespace AudioMaster
 		
 	}
 
+	Sound* SoundManager::GetSound()
+	{
+		this->sound = this->r.GetSound();
+		return &this->sound;
+	}
+
 	void SoundManager::Import(std::string file)
 	{
 		// TODO: Add file type validation to import/export functions
@@ -187,7 +193,7 @@ namespace AudioMaster
 	}
 	void SoundManager::Record()
 	{
-		r.SetFormat(AL_FORMAT_MONO16);
+		r.SetFormat(AL_FORMAT_MONO8);
 		r.SetSampleRate(44100);
 
 		r.Start();

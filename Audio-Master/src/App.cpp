@@ -20,6 +20,8 @@ namespace AudioMaster
 		wxTheApp->SetAppName(AudioMaster::PROJECT_NAME);
 		wxTheApp->SetAppDisplayName(AudioMaster::PROJECT_DISPLAY_NAME);
 
+		::wxInitAllImageHandlers();
+
 		// Load settings
 		if (LoadSetting("installed", false) == false)
 			this->SetDefaultSettings();

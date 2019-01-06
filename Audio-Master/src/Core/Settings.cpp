@@ -1,84 +1,138 @@
 #include "Settings.h"
 #include <string>
+#include <fstream>
+#include <iomanip>
 
-#include "JsonBox.h"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 namespace AudioMaster
 {
+	json GetSettingsFile();
+	void SaveSettingsFile(json file);
+
 	bool CreateSettingsFile()
 	{
-		JsonBox::Object windowObj;
-
-		JsonBox::Value v(windowObj);
-		v.writeToFile(SETTINGS_FILE_PATH);
+		SaveSettingsFile(json());
 
 		return true;
 	}
 
-	void SaveSetting(const char* setting, JsonBox::Value value)
+	json GetSettingsFile()
+	{
+		std::ifstream infile(SETTINGS_FILE_PATH);
+		json file;
+		infile >> file;
+		infile.close();
+
+		return file;
+	}
+
+	void SaveSettingsFile(json file)
+	{
+		std::ofstream outfile(SETTINGS_FILE_PATH);
+		outfile << std::setw(4) << file << std::endl;
+	}
+
+	void SaveSetting(const char* setting, const char* value)
 	{
 		// Load the current settings
-		JsonBox::Value file;
-		file.loadFromFile(SETTINGS_FILE_PATH);
+		json file = GetSettingsFile();
 
 		// Save the setting (updates the existing setting or creates a new one if it doesn't exist)
 		file[setting] = value;
 
 		// Write the new settings file
-		file.writeToFile(SETTINGS_FILE_PATH);
-	}
-
-	void SaveSetting(const char* setting, const char* value)
-	{
-		SaveSetting(setting, JsonBox::Value(value));
+		SaveSettingsFile(file);
 	}
 	void SaveSetting(const char* setting, int value)
 	{
-		SaveSetting(setting, JsonBox::Value(value));
+		// Load the current settings
+		json file = GetSettingsFile();
+
+		// Save the setting (updates the existing setting or creates a new one if it doesn't exist)
+		file[setting] = value;
+
+		// Write the new settings file
+		SaveSettingsFile(file);
 	}
 	void SaveSetting(const char* setting, double value)
 	{
-		SaveSetting(setting, JsonBox::Value(value));
+		// Load the current settings
+		json file = GetSettingsFile();
+
+		// Save the setting (updates the existing setting or creates a new one if it doesn't exist)
+		file[setting] = value;
+
+		// Write the new settings file
+		SaveSettingsFile(file);
 	}
 	void SaveSetting(const char* setting, bool value)
 	{
-		SaveSetting(setting, JsonBox::Value(value));
+		// Load the current settings
+		json file = GetSettingsFile();
+
+		// Save the setting (updates the existing setting or creates a new one if it doesn't exist)
+		file[setting] = value;
+
+		// Write the new settings file
+		SaveSettingsFile(file);
 	}
 
 	const char* LoadSetting(const char* setting, const char* defaultValue)
 	{
 		// Load the current settings
-		JsonBox::Value file;
-		file.loadFromFile(SETTINGS_FILE_PATH);
+		json file = GetSettingsFile();
 
-		// Try to get the string setting, if it is not there then return the default
-		return file[setting].tryGetString(defaultValue).c_str();
+		// If the setting is not then return the default value
+		if (false)
+		{
+			return defaultValue;
+		}
+
+		// Otherwise, return the setting value
+		return file[setting].get<std::string>().c_str();
 	}
 	int LoadSetting(const char* setting, int defaultValue)
 	{
 		// Load the current settings
-		JsonBox::Value file;
-		file.loadFromFile(SETTINGS_FILE_PATH);
+		json file = GetSettingsFile();
 
-		// Try to get the int setting, if it is not there then return the default
-		return file[setting].tryGetInteger(defaultValue);
+		// If the setting is not then return the default value
+		if (false)
+		{
+			return defaultValue;
+		}
+
+		// Otherwise, return the setting value
+		return file[setting].get<int>();
 	}
 	double LoadSetting(const char* setting, double defaultValue)
 	{
 		// Load the current settings
-		JsonBox::Value file;
-		file.loadFromFile(SETTINGS_FILE_PATH);
+		json file = GetSettingsFile();
 
-		// Try to get the double setting, if it is not there then return the default
-		return file[setting].tryGetDouble(defaultValue);
+		// If the setting is not then return the default value
+		if (false)
+		{
+			return defaultValue;
+		}
+
+		// Otherwise, return the setting value
+		return file[setting].get<double>();
 	}
 	bool LoadSetting(const char* setting, bool defaultValue)
 	{
 		// Load the current settings
-		JsonBox::Value file;
-		file.loadFromFile(SETTINGS_FILE_PATH);
+		json file = GetSettingsFile();
 
-		// Try to get the bool setting, if it is not there then return the default
-		return file[setting].tryGetBoolean(defaultValue);
+		// If the setting is not then return the default value
+		if (false)
+		{
+			return defaultValue;
+		}
+
+		// Otherwise, return the setting value
+		return file[setting].get<bool>();
 	}
 }
