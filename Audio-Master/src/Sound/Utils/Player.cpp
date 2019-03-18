@@ -2,12 +2,13 @@
 
 namespace AudioMaster
 {
-    ALCdevice*  Player::device  = nullptr;
-	ALCcontext* Player::context = nullptr;
+    ALCdevice*  Player::device		 = nullptr;
+	ALCcontext* Player::context		 = nullptr;
+	const char* Player::outputDevice = "";
 
 	Player::Player()
 	{
-		this->sound = Sound();
+		this->sound = new Sound();
 
 		if (Player::device == nullptr)
 		{
@@ -30,9 +31,23 @@ namespace AudioMaster
 		alDeleteSources	 (1, &this->source);
 		alcDestroyContext(Player::context);
 		alcCloseDevice	 (Player::device);
+
+		//delete this->sound;
 	}
 
-	void Player::SetSound(Sound& s)
+	void Player::SetOutputDevice(const char* device)
+	{
+		Player::outputDevice = device;
+
+		alcCloseDevice(Player::device);
+		alcDestroyContext(Player::context);
+
+		Player::device = alcOpenDevice(Player::outputDevice);
+		Player::context = alcCreateContext(Player::device, 0);
+		alcMakeContextCurrent(Player::context);
+	}
+
+	void Player::SetSound(Sound* s)
 	{
 		this->sound = s;
 
@@ -51,17 +66,17 @@ namespace AudioMaster
 		// Get the sound format
 		ALenum format = AL_FORMAT_MONO8;
 
-		if		(this->sound.channels == 1 && this->sound.bitsPerSample ==  8)
+		if		(this->sound->channels == 1 && this->sound->bitsPerSample ==  8)
 			format = AL_FORMAT_MONO8;
-		else if (this->sound.channels == 1 && this->sound.bitsPerSample == 16)
+		else if (this->sound->channels == 1 && this->sound->bitsPerSample == 16)
 			format = AL_FORMAT_MONO16;
-		else if (this->sound.channels == 2 && this->sound.bitsPerSample ==  8)
+		else if (this->sound->channels == 2 && this->sound->bitsPerSample ==  8)
 			format = AL_FORMAT_STEREO8;
-		else if (this->sound.channels == 2 && this->sound.bitsPerSample == 16)
+		else if (this->sound->channels == 2 && this->sound->bitsPerSample == 16)
 			format = AL_FORMAT_STEREO16;
 
 		// Buffer the sound data
-		alBufferData(this->buffer, format,    this->sound.data, this->sound.size, this->sound.sampleRate);
+		alBufferData(this->buffer, format,    this->sound->data, this->sound->size, this->sound->sampleRate);
 		alSourcei   (this->source, AL_BUFFER, this->buffer);
 	}
 
@@ -78,7 +93,7 @@ namespace AudioMaster
 
 	void Player::Start(float time)
 	{
-		alSourcei(this->source, AL_SAMPLE_OFFSET, (int)(time * this->sound.sampleRate));
+		alSourcei(this->source, AL_SAMPLE_OFFSET, (int)(time * this->sound->sampleRate));
 		alSourcePlay(this->source);
 	}
 

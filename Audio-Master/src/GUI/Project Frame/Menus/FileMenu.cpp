@@ -9,6 +9,8 @@ namespace AudioMaster
 {
     FileMenu::FileMenu()
     {
+		Logger::GetInstance()->Log("Creating File Menu");
+
 		this->Append(EFileMenu::New,	"New",		"Creates a new project");
 		this->Append(EFileMenu::Open,	"Open",		"Opens an existing project");
 		this->Append(EFileMenu::Save,	"Save",		"Saves the current project");
@@ -20,6 +22,6 @@ namespace AudioMaster
 
     FileMenu::~FileMenu()
     {
-        
+		Logger::GetInstance()->Log("Destroying File Menu");
     }
 }

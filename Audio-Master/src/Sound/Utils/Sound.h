@@ -1,6 +1,8 @@
 #ifndef INC_SOUND_H
 #define INC_SOUND_H
 
+#include "..\..\Core\Logger.h"
+
 namespace AudioMaster
 {
 	typedef unsigned long DWORD;
@@ -33,6 +35,30 @@ namespace AudioMaster
 			channels = 1;		// Default is Mono
 			sampleRate = 44100;	// Default is CD standard
 			bitsPerSample = 8;		// Default is 8-bit audio
+
+			std::string output = "Sound : {\n";
+			output += "\tSize : " + std::to_string(size) + "\n";
+			output += "\tChannels : " + std::to_string(channels) + "\n";
+			output += "\tSample Rate : " + std::to_string(sampleRate) + "\n";
+			output += "\tBits Per Sample : " + std::to_string(bitsPerSample) + "\n";
+			output += "}";
+			Logger::GetInstance()->Log("Sound Created");
+			Logger::GetInstance()->Log(output);
+		}
+
+		~Sound()
+		{
+			//delete[] this->data;
+			this->data = nullptr;
+			Logger::GetInstance()->Log("Sound Deleted");
+		}
+
+		void Resize(int newSize)
+		{
+			Logger::GetInstance()->Log("Sound Resized from " + std::to_string(size) + " to " + std::to_string(newSize));
+			//delete[] data;
+			data = new unsigned char[newSize];
+			size = newSize;
 		}
 	};
 }

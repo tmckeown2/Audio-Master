@@ -6,6 +6,7 @@
 
 #include <wx/aui/auibar.h>
 #include <wx/frame.h>
+#include <wx/event.h>
 #include <wx/combobox.h>
 
 #include "../../../AudioMaster.h"
@@ -14,17 +15,24 @@
 namespace AudioMaster
 {
 
+	enum EIOComboIDs
+	{
+		IO_COMBO_INPUT,
+		IO_COMBO_OUTPUT,
+		IO_COMBO_FREQ,
+		IO_COMBO_FORMAT
+	};
+
 	class IOToolbar final : public wxAuiToolBar
 	{
 	private:
-		Logger* logger;
-		SoundManager* soundManager;
-
 		wxArrayString inputArray;
 		wxArrayString outputArray;
 
 		wxComboBox* inputDevices;
 		wxComboBox* outputDevices;
+		wxComboBox* inputFrequency;
+		wxComboBox* inputFormat;
 
 	public:
 		IOToolbar(wxFrame* frame);
@@ -35,6 +43,13 @@ namespace AudioMaster
 		void PopulateOutputs();
 		void InitImages();
 		void InitTools();
+
+		void OnInputChanged(wxCommandEvent& e);
+		void OnOutputChanged(wxCommandEvent& e);
+		void OnFreqChanged(wxCommandEvent& e);
+		void OnFormatChanged(wxCommandEvent& e);
+
+		wxDECLARE_EVENT_TABLE();
 	};
 	
 }

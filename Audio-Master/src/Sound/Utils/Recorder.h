@@ -14,17 +14,19 @@ namespace AudioMaster
 	class Recorder
 	{
 	private:
-		static Sound				sound;
+		static Sound*				sound;
 		static bool					recording;
 		static bool					capturing;
 		static std::vector<ALubyte> rawData;
+		static const char*			device;
 
 	public:
 		Recorder();
 		~Recorder();
 
-		Sound& GetSound() const;
+		Sound* GetSound() const;
 
+		void SetInputDevice(const char* device);
 		void SetSampleRate(int rate);
 		void SetFormat(ALenum format);
 

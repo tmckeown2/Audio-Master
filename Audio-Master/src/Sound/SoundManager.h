@@ -21,7 +21,6 @@ namespace AudioMaster
 	{
 	private:
 		static SoundManager* instance;
-		static Logger* logger;
 		
 		static ALenum errorCode;
 
@@ -29,9 +28,11 @@ namespace AudioMaster
 
 		static std::thread recordingThread;
 
-		Sound sound;
-		Recorder r;
-		Player p;
+		Sound* sound;
+		Recorder* r;
+		Player* p;
+
+		time_t lastRecorded;
 	public:
 		SoundManager();
 		~SoundManager();
@@ -50,8 +51,9 @@ namespace AudioMaster
 		bool SetOutput(const char* outputDevice);
 
 		void SetInputFrequency(unsigned int frequency);
-		void SetBufferSize(int size);
+		void SetInputFormat(ALenum format);
 
+		void  SetSound(Sound* s);
 		Sound* GetSound();
 
 		void Import(std::string file);
@@ -61,6 +63,8 @@ namespace AudioMaster
 		void Pause();
 		void Record();
 		void Stop();
+
+		time_t LastRecorded();
 	};
 	
 }

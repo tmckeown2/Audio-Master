@@ -84,8 +84,8 @@ namespace AudioMaster
 		// Load the current settings
 		json file = GetSettingsFile();
 
-		// If the setting is not then return the default value
-		if (false)
+		// If the setting is not found then return the default value
+		if (file.find(setting) == file.end())
 		{
 			return defaultValue;
 		}
@@ -98,8 +98,8 @@ namespace AudioMaster
 		// Load the current settings
 		json file = GetSettingsFile();
 
-		// If the setting is not then return the default value
-		if (false)
+		// If the setting is not found then return the default value
+		if (file.find(setting) == file.end())
 		{
 			return defaultValue;
 		}
@@ -112,8 +112,8 @@ namespace AudioMaster
 		// Load the current settings
 		json file = GetSettingsFile();
 
-		// If the setting is not then return the default value
-		if (false)
+		// If the setting is not found then return the default value
+		if (file.find(setting) == file.end())
 		{
 			return defaultValue;
 		}
@@ -126,8 +126,8 @@ namespace AudioMaster
 		// Load the current settings
 		json file = GetSettingsFile();
 
-		// If the setting is not then return the default value
-		if (false)
+		// If the setting is not found then return the default value
+		if (file.find(setting) == file.end())
 		{
 			return defaultValue;
 		}

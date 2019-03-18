@@ -4,10 +4,12 @@ namespace AudioMaster
 {
 
 	Logger* Logger::instance = nullptr;
+	std::ofstream Logger::logFile;
 
     Logger::Logger()
     {
-		Logger::logFile.open(LOG_FILE_PATH, std::ios::out);
+		// Open the file in output (writing) mode and with the append flag set
+		Logger::logFile.open(LOG_FILE_PATH, std::ios::out | std::ofstream::trunc);
 		Logger::logFile.imbue(std::locale::classic());
 		
 		if (Logger::logFile.fail() || !Logger::logFile)
@@ -17,7 +19,6 @@ namespace AudioMaster
     }
     Logger::~Logger()
     {
-        Logger::logFile.close();
     }
 
 	Logger* Logger::GetInstance()
@@ -31,6 +32,7 @@ namespace AudioMaster
 	}
 	void Logger::ResetInstance()
 	{
+		Logger::logFile.close();
 		delete Logger::instance;
 		Logger::instance = nullptr;
 	}
@@ -41,5 +43,13 @@ namespace AudioMaster
 			return;
 
 		Logger::logFile << message << std::endl;
+	}
+
+	void Logger::Print(std::string messagePartial)
+	{
+		if (Logger::logFile.fail() || !Logger::logFile)
+			return;
+
+		Logger::logFile << messagePartial;
 	}
 }

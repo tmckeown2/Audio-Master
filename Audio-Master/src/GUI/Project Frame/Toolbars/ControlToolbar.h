@@ -5,6 +5,7 @@
 #include <wx/frame.h>
 #include <wx/bitmap.h>
 #include <wx/event.h>
+#include <wx/stdpaths.h>
 
 #include "../../../AudioMaster.h"
 #include "../../../Sound/SoundManager.h"
@@ -18,15 +19,13 @@ namespace AudioMaster
 		CONTROL_TOOL_PAUSE,
 		CONTROL_TOOL_RECORD,
 		CONTROL_TOOL_STOP,
+		CONTROL_TOOL_IMPORT,
 		CONTROL_TOOL_MAX
 	};
 
 	class ControlToolbar final : public wxAuiToolBar
 	{
 	private:
-		Logger* logger;
-		SoundManager* soundManager;
-
 		wxBitmap toolImg[CONTROL_TOOL_MAX];
 
 	public:
@@ -41,6 +40,7 @@ namespace AudioMaster
 		void Pause(wxCommandEvent& e);
 		void Record(wxCommandEvent& e);
 		void Stop(wxCommandEvent& e);
+		void Import(wxCommandEvent& e);
 
 		wxDECLARE_EVENT_TABLE();
 	};

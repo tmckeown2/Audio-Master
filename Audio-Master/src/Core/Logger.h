@@ -12,8 +12,7 @@ namespace AudioMaster
 	{
 	private:
 		static Logger* instance;
-
-		std::ofstream logFile;
+		static std::ofstream logFile;
 
 	public:
 		Logger();
@@ -27,6 +26,7 @@ namespace AudioMaster
 		static void ResetInstance();
 
 		void Log(std::string message);
+		void Print(std::string messagePartial);
 	};
 	
 }

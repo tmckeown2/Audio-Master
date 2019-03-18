@@ -12,8 +12,6 @@ namespace AudioMaster
 	class App final : public wxApp
 	{
 	private:
-		Logger* logger;
-
 		// Window variables
 		wxPoint windowPos;
 		wxSize  windowSize;
@@ -36,3 +34,6 @@ namespace AudioMaster
 }
 
 #endif
+
+
+//TODO: Memory leaks when 

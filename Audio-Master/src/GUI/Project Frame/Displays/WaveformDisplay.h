@@ -16,10 +16,19 @@ namespace AudioMaster
 	class WaveformDisplay final : public wxScrolled<wxPanel>
 	{
 	private:
-		int scrollMultiplier;
+		float scrollMultiplier;
+		float minScrollMultiplier;
 		int scrolled;
+		bool ctrlScroll;
 
 		int displayHeight;
+
+		float zoom;
+		int zoomMultiplier;
+		float minZoom;
+		float maxZoom;
+
+		Sound* cachedWaveData;
 
 	public:
 		WaveformDisplay(wxFrame* parent, wxSize size);
@@ -30,6 +39,9 @@ namespace AudioMaster
 		void OnPaint(wxPaintEvent& e);
 		void OnScroll(wxMouseEvent& e);
 		void OnResize(wxSizeEvent& e);
+		void OnDClick(wxMouseEvent& e);
+		void OnKeyDown(wxKeyEvent& e);
+		void OnKeyUp(wxKeyEvent& e);
 
 	private:
 		void Render(wxDC& dc);

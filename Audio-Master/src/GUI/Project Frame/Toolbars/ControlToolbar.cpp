@@ -13,23 +13,18 @@ namespace AudioMaster
 		EVT_TOOL(CONTROL_TOOL_PAUSE,  ControlToolbar::Pause)
 		EVT_TOOL(CONTROL_TOOL_RECORD, ControlToolbar::Record)
 		EVT_TOOL(CONTROL_TOOL_STOP,   ControlToolbar::Stop)
+		EVT_TOOL(CONTROL_TOOL_IMPORT, ControlToolbar::Import)	
 
 	wxEND_EVENT_TABLE()
 
     ControlToolbar::ControlToolbar(wxFrame* parent)
 		: wxAuiToolBar(parent, wxID_ANY)
     {
-		// Get the logger
-		this->logger = Logger::GetInstance();
-
-		this->logger->Log("Initialising Control Toolbar");
-
-		// Get the sound manager
-		this->soundManager = SoundManager::GetInstance();
-
+		Logger::GetInstance()->Log("Initialising Control Toolbar");
+		
 		// Initialise the tools and their images
 		this->InitImages();
-		this->InitTools();
+		this->InitTools(); 
 
 		// Call Realize to setup the display size and positions of the new tools
 		this->Realize();
@@ -37,7 +32,7 @@ namespace AudioMaster
 
     ControlToolbar::~ControlToolbar()
     {
-        
+		Logger::GetInstance()->Log("Destroying Control Toolbar");
     }
 
 	void ControlToolbar::InitImages()
@@ -49,18 +44,20 @@ namespace AudioMaster
 			"Play.png",
 			"Pause.png",
 			"Record.png",
-			"Stop.png"
+			"Stop.png",
+			"Import.png"
 		};
 
 		// Load the images, if it cannot load then log an error and skip that file.
 		// Do not want to cause a crash because an image did not load correctly, it is not a fatal issue.
+		wxString resPath = wxStandardPaths::Get().GetResourcesDir() + "\\res\\";
 		for (int i = 0; i < CONTROL_TOOL_MAX; ++i)
 		{
-			wxImage temp = wxImage("D:\\Uni\\3rd Year Project\\Project Solution\\Audio-Master\\Audio-Master\\res\\" + icons[i]);
+			wxImage temp = wxImage(resPath + icons[i]);
 			temp = temp.Rescale(30, 30, wxImageResizeQuality::wxIMAGE_QUALITY_HIGH);
 			this->toolImg[i] = wxBitmap(temp);
 
-			//this->toolImg[i] = wxBitmap("D:\\Uni\\3rd Year Project\\Project Solution\\Audio-Master\\Audio-Master\\res\\" + icons[i], wxBITMAP_TYPE_PNG);
+			Logger::GetInstance()->Log("Loaded image: " + (resPath + icons[i]).ToStdString());
 		}
 	}
 
@@ -71,22 +68,32 @@ namespace AudioMaster
 		this->AddTool(CONTROL_TOOL_PAUSE,  _("Pause"),  this->toolImg[CONTROL_TOOL_PAUSE ], _("Pauses Playback"		    ));
 		this->AddTool(CONTROL_TOOL_RECORD, _("Record"), this->toolImg[CONTROL_TOOL_RECORD], _("Starts Recording"		));
 		this->AddTool(CONTROL_TOOL_STOP,   _("Stop"),   this->toolImg[CONTROL_TOOL_STOP  ], _("Stops Playback/Recording"));
+		this->AddTool(CONTROL_TOOL_IMPORT, _("Import"), this->toolImg[CONTROL_TOOL_IMPORT], _("Imports some wave data"  ));
 	}
 
 	void ControlToolbar::Play(wxCommandEvent& WXUNUSED(e))
 	{
-		this->soundManager->Play();
+		Logger::GetInstance()->Log("Playback clicked");
+		SoundManager::GetInstance()->Play();
 	}
 	void ControlToolbar::Pause(wxCommandEvent& WXUNUSED(e))
 	{
-		this->soundManager->Pause();
+		Logger::GetInstance()->Log("Pause clicked");
+		SoundManager::GetInstance()->Pause();
 	}
 	void ControlToolbar::Record(wxCommandEvent& WXUNUSED(e))
 	{
-		this->soundManager->Record();
+		Logger::GetInstance()->Log("Record clicked");
+		SoundManager::GetInstance()->Record();
 	}
 	void ControlToolbar::Stop(wxCommandEvent& WXUNUSED(e))
 	{
-		this->soundManager->Stop();
+		Logger::GetInstance()->Log("Stop clicked");
+		SoundManager::GetInstance()->Stop();
+	}
+	void ControlToolbar::Import(wxCommandEvent& WXUNUSED(e))
+	{
+		Logger::GetInstance()->Log("Import clicked");
+		SoundManager::GetInstance()->Import("test.wav");
 	}
 }

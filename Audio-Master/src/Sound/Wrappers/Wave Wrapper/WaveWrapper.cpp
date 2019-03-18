@@ -64,10 +64,10 @@ namespace AudioMaster
 		}
 	}
 
-	Sound& WaveWrapper::Import(const char* filename)
+	Sound* WaveWrapper::Import(const char* filename)
 	{
 		// Create a sound struct to store data in and return
-		Sound sound = Sound();
+		Sound* sound = new Sound();
 
 		// Open the file
 		std::ifstream file(filename, std::ios::in | std::ios::binary);
@@ -102,20 +102,20 @@ namespace AudioMaster
 				// Read the file's fmt chunk into the FMTCHUNK struct
 				file.read((char*)&fmt, sizeof(FMTCHUNK));
 
-				sound.format = fmt.format;
-				sound.channels = fmt.channels;
-				sound.sampleRate = fmt.sampleRate;
-				sound.bitsPerSample = fmt.bitsPerSample;
+				sound->format = fmt.format;
+				sound->channels = fmt.channels;
+				sound->sampleRate = fmt.sampleRate;
+				sound->bitsPerSample = fmt.bitsPerSample;
 			}
 			// data Chunk is the start of the data part of the file
 			// Contains the actual byte data of the wave file (2 channels = interleaved data 8-bit=[LR LR LR] 16-bit=[LLRR LLRR LLRR])
 			else if (chunkName == "data")
 			{
-				sound.size = chunkSize;
-				sound.data = new unsigned char[chunkSize];
+				sound->size = chunkSize;
+				sound->data = new unsigned char[chunkSize];
 
 				// Read the byte data into the sound struct
-				file.read((char*)sound.data, chunkSize);
+				file.read((char*)sound->data, chunkSize);
 
 				// Avoids any possible duplication of the data chunk
 				// This should work fine as "data" should be the final chunk
@@ -129,14 +129,14 @@ namespace AudioMaster
 		}
 
 		// Set the sound's length
-		sound.length = (double)sound.size / (sound.channels * sound.sampleRate * (sound.bitsPerSample / 8.0)) * 1000.0;
+		sound->length = (double)sound->size / (sound->channels * sound->sampleRate * (sound->bitsPerSample / 8.0)) * 1000.0;
 
 		// Close the file stream now that we are done with it
 		file.close();
 
 		return sound;
 	}
-	void   WaveWrapper::Export(const char* filename, Sound& data)
+	void   WaveWrapper::Export(const char* filename, Sound* data)
 	{
 		// Open the file
 		std::ofstream file(filename, std::ios::out | std::ios::binary);
@@ -149,16 +149,16 @@ namespace AudioMaster
 		}
 
 		std::vector<unsigned char> fileData;
-		int dataChunkSize = data.size;
+		int dataChunkSize = data->size;
 
 		// Create the fmt  Chunk
 		FMTCHUNK fmt;
-		fmt.format = data.format;
-		fmt.channels = data.channels;
-		fmt.sampleRate = data.sampleRate;
-		fmt.bitsPerSample = data.bitsPerSample;
-		fmt.blockAlign = data.channels * (data.bitsPerSample / 8.0);
-		fmt.bytesPerSecond = data.sampleRate * fmt.blockAlign;
+		fmt.format = data->format;
+		fmt.channels = data->channels;
+		fmt.sampleRate = data->sampleRate;
+		fmt.bitsPerSample = data->bitsPerSample;
+		fmt.blockAlign = data->channels * (data->bitsPerSample / 8.0);
+		fmt.bytesPerSecond = data->sampleRate * fmt.blockAlign;
 
 		// Write the RIFF Chunk
 		AddStringToFileData(fileData, "RIFF");
@@ -179,20 +179,20 @@ namespace AudioMaster
 		AddStringToFileData(fileData, "data");
 		AddInt32ToFileData (fileData, dataChunkSize);
 
-		for (int i = 0; i < data.size; i += data.channels)
+		for (int i = 0; i < data->size; i += data->channels)
 		{
-			for (int channel = 0; channel < data.channels; ++channel)
+			for (int channel = 0; channel < data->channels; ++channel)
 			{
-				if (data.bitsPerSample == 8)
+				if (data->bitsPerSample == 8)
 				{
-					unsigned char byte = data.data[i + channel];
+					unsigned char byte = data->data[i + channel];
 					fileData.push_back(byte);
 				}
-				else if (data.bitsPerSample == 16)
+				else if (data->bitsPerSample == 16)
 				{
 					unsigned char bytes[2];
-					bytes[0] = data.data[i + channel];
-					bytes[1] = data.data[(i + channel) + 1];
+					bytes[0] = data->data[i + channel];
+					bytes[1] = data->data[(i + channel) + 1];
 
 					fileData.push_back(bytes[0]);
 					fileData.push_back(bytes[1]);

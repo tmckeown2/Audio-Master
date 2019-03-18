@@ -1,0 +1,7 @@
+﻿  Fourier.cpp
+d:\uni\3rd year project\project solution\audio-master\fft test\fourier.cpp(70): warning C4018: '<': signed/unsigned mismatch
+  Source.cpp
+d:\uni\3rd year project\project solution\audio-master\fft test\source.cpp(15): warning C4018: '<': signed/unsigned mismatch
+d:\uni\3rd year project\project solution\audio-master\fft test\source.cpp(32): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  FFT Test.vcxproj -> D:\Uni\3rd Year Project\Project Solution\Audio-Master\Debug\FFT Test.exe

@@ -30,8 +30,8 @@ namespace AudioMaster
 		void AddInt16ToFileData (std::vector<unsigned char> &fileData, short i, Endianness endianness = Endianness::LittleEndian);
 
 	public:
-		Sound& Import(const char* filename);
-		void   Export(const char* filename, Sound& data);
+		Sound* Import(const char* filename);
+		void   Export(const char* filename, Sound* data);
 	};
 	
 }

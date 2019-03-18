@@ -6,6 +6,7 @@
 #include <wx/aui/framemanager.h>
 
 #include "../../Sound/SoundManager.h"
+#include "../../Sound/SFX/SFXUtils.h"
 
 #include "Menus/MenuBar.h"
 
@@ -23,7 +24,6 @@ namespace AudioMaster
 	class ProjectFrame final : public wxFrame
 	{
 	private:
-		Logger* logger;
 		wxAuiManager auiManager;
 
 		wxPoint pos;
@@ -38,6 +38,10 @@ namespace AudioMaster
 
 		// Displays
 		WaveformDisplay* waveformDisplay;
+		time_t lastUpdated;
+
+		// Timers
+		wxTimer refreshTimer;
 
 	public:
 		ProjectFrame(wxString title, wxPoint pos, wxSize size, bool maximised);
@@ -46,11 +50,17 @@ namespace AudioMaster
 		void OnClose(wxCloseEvent& e);
 		void OnResize(wxSizeEvent& e);
 		void OnMove(wxMoveEvent& e);
+		void OnTimer(wxTimerEvent& e);
+
+		void OnQuit(wxCommandEvent& e);
+
+		void OnEffect(wxCommandEvent& e);
 
 	private:
 		void InitMenus();
 		void InitToolbars();
 		void InitDisplays();
+		void InitPlugins();
 
 		void UpdateDisplays();
 

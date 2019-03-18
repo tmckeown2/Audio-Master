@@ -7,7 +7,6 @@
 namespace AudioMaster
 {
 	SoundManager* SoundManager::instance = nullptr;
-	Logger*		  SoundManager::logger   = nullptr;
 
 	ALenum SoundManager::errorCode = 0;
 
@@ -17,8 +16,9 @@ namespace AudioMaster
 
     SoundManager::SoundManager()
     {
-		// Get the logger
-		this->logger = Logger::GetInstance();
+		this->sound = new Sound();
+		this->r = new Recorder();
+		this->p = new Player();
 
 		this->errorCode = AL_NO_ERROR;
 
@@ -26,13 +26,21 @@ namespace AudioMaster
 		this->SetInput (alGetString(ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER));
 		this->SetOutput(alGetString(ALC_DEFAULT_DEVICE_SPECIFIER));
 
-		this->recording = false;
+		// Set default input frequency and format
+		this->SetInputFrequency(44100);
+		this->SetInputFormat(AL_FORMAT_MONO8);
 
-		this->sound = Sound();
+		this->recording = false;
     }
     SoundManager::~SoundManager()
     {
+		Logger::GetInstance()->Log("Destroying SoundManager");
 
+		delete this->p;
+		delete this->r;
+
+		//delete this->sound;
+		//this->sound = nullptr;
     }
 
 	SoundManager* SoundManager::GetInstance()
@@ -81,7 +89,7 @@ namespace AudioMaster
 			}
 			else
 			{
-				// TODO: Log error - return default device
+				Logger::GetInstance()->Log("Cannot get a list of available capture devices, returning the system default");
 				const ALCchar* input = alcGetString(nullptr, ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER);
 
 				inputDevices.push_back(input);
@@ -89,7 +97,7 @@ namespace AudioMaster
 		}
 		else
 		{
-			// TODO: Log error - return empty list
+			Logger::GetInstance()->Log("This PC may not support Sound Capture");
 		}
 
 		return inputDevices;
@@ -124,7 +132,7 @@ namespace AudioMaster
 			}
 			else
 			{
-				// TODO: Log error - return default device
+				Logger::GetInstance()->Log("Cannot get a list of available output devices, returning the system default");
 				const ALCchar* output = alcGetString(nullptr, ALC_DEFAULT_DEVICE_SPECIFIER);
 
 				outputDevices.push_back(output);
@@ -132,7 +140,7 @@ namespace AudioMaster
 		}
 		else
 		{
-			// TODO: Log error - return empty list
+			Logger::GetInstance()->Log("Cannot get available output device");
 		}
 
 		return outputDevices;
@@ -142,40 +150,60 @@ namespace AudioMaster
 	{
 		if (recording)
 		{
-			this->logger->Log("Cannot set input, already recording");
+			Logger::GetInstance()->Log("Cannot set input, already recording");
 			return false;
 		}
 
+		if (input != NULL)
+			Logger::GetInstance()->Log("Capture device set: " + std::string(input));
+		else
+			Logger::GetInstance()->Log("Capture device set: DEFAULT");
+
+		r->SetInputDevice(input);
 		return true;
 	}
 	bool SoundManager::SetOutput(const char* output)
 	{
+		if (output != NULL)
+			Logger::GetInstance()->Log("Playback device set: " + std::string(output));
+		else
+			Logger::GetInstance()->Log("Playback device set: DEFAULT");
 
+		p->SetOutputDevice(output);
 		return true;
 	}
 
 	void SoundManager::SetInputFrequency(unsigned int frequency)
 	{
-		this->sound.sampleRate = frequency;
+		Logger::GetInstance()->Log("Sample Rate set: " + std::to_string(frequency));
+		r->SetSampleRate(frequency);
 	}
-	void SoundManager::SetBufferSize(int size)
+	void SoundManager::SetInputFormat(ALenum format)
 	{
-		
+		Logger::GetInstance()->Log("Format set: " + std::to_string(format));
+		r->SetFormat(format);
 	}
 
+	void SoundManager::SetSound(Sound* s)
+	{
+		this->sound = s;
+		p->SetSound(s);
+	}
 	Sound* SoundManager::GetSound()
 	{
-		this->sound = this->r.GetSound();
-		return &this->sound;
+		if (this->recording)
+		{
+			this->sound = this->r->GetSound();
+		}
+
+		return this->sound;
 	}
 
 	void SoundManager::Import(std::string file)
 	{
-		// TODO: Add file type validation to import/export functions
-		// TODO: Make import/export functions actually do something with sound data
-
 		WaveWrapper f = WaveWrapper();
-		Sound s = f.Import(file.c_str());
+		this->sound = f.Import(file.c_str());
+		p->SetSound(this->sound);
 	}
 	void SoundManager::Export(std::string file)
 	{
@@ -185,34 +213,37 @@ namespace AudioMaster
 
 	void SoundManager::Play()
 	{
-		p.Start();
+		p->Start();
 	}
 	void SoundManager::Pause()
 	{
-		p.Pause();
+		p->Pause();
 	}
 	void SoundManager::Record()
 	{
-		r.SetFormat(AL_FORMAT_MONO8);
-		r.SetSampleRate(44100);
-
-		r.Start();
+		r->Start();
 		this->recording = true;
 	}
 	void SoundManager::Stop()
 	{
 		if (this->recording)
 		{
-			r.Stop();
+			r->Stop();
 
-			this->sound = r.GetSound();
-			p.SetSound(this->sound);
+			this->sound = r->GetSound();
+			p->SetSound(this->sound);
 
 			this->Export("test.wav");
 
 			this->recording = false;
+			this->lastRecorded = time(NULL);
 		}
 
-		p.Stop();
+		p->Stop();
+	}
+
+	time_t SoundManager::LastRecorded()
+	{
+		return this->lastRecorded;
 	}
 }

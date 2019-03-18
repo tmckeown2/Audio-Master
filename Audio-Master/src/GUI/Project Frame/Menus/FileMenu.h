@@ -4,6 +4,8 @@
 #include <wx/menu.h>
 #include <wx/frame.h>
 
+#include "..\..\..\Core\Logger.h"
+
 namespace AudioMaster
 {
 

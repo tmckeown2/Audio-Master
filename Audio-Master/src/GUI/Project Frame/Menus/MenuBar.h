@@ -5,6 +5,9 @@
 #include <wx/frame.h>
 
 #include "FileMenu.h"
+#include "EffectsMenu.h"
+
+#include "..\..\..\Core\Logger.h"
 
 namespace AudioMaster
 {
@@ -13,10 +16,14 @@ namespace AudioMaster
 	{
 	private:
 		wxMenu* fileMenu;
+		wxMenu* effectsMenu;
 
 	public:
 		MenuBar();
 		~MenuBar();
+
+		std::map<std::string, int> GetEffects();
+		std::vector<fs::path> GetEffectsDLLs();
 	};
 	
 }

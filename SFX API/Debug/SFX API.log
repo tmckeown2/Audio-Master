@@ -1,0 +1,4 @@
+﻿  Source.cpp
+d:\uni\3rd year project\project solution\audio-master\sfx api\source.cpp(40): warning C4018: '<': signed/unsigned mismatch
+d:\uni\3rd year project\project solution\audio-master\sfx api\source.cpp(74): warning C4018: '<': signed/unsigned mismatch
+  SFX API.vcxproj -> D:\Uni\3rd Year Project\Project Solution\Audio-Master\Debug\SFX API.exe

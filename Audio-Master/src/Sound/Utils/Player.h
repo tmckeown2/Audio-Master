@@ -14,8 +14,9 @@ namespace AudioMaster
 	private:
 		static ALCdevice*  device;
 		static ALCcontext* context;
+		static const char* outputDevice;
 
-		Sound  sound;
+		Sound* sound;
 		ALuint source;
 		ALuint buffer;
 
@@ -23,7 +24,8 @@ namespace AudioMaster
 		Player();
 		~Player();
 
-		void SetSound(Sound& s);
+		void SetOutputDevice(const char* output);
+		void SetSound(Sound* s);
 
 		void Start();
 		void Start(int position);
